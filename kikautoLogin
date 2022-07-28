@@ -1,0 +1,28 @@
+#import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+username = config['REQUIRED']['username']
+password = config['REQUIRED']['password']
+response ={}
+super = config['REQUIRED']['super']
+prefix = config['REQUIRED']['prefix']
+
+kik_bot_username = config['OPTIONAL']['kik_bot_username']
+
+
+
+
+#create file called config.ini
+#PASTE#
+[REQUIRED]
+username = YourBotUserName
+password = YourBotPassword
+prefix = /
+super = [main bot owners jid]
+owner = bot owners name
+bot_name = bot name
+
+[OPTIONAL]
+kik_bot_username =
+kik_bot_api_key =
