@@ -1,3 +1,16 @@
+if is_user_admin(chat_message.from_jid, chat_message.group_jid):
+                is_admin = True
+                is_superadmin = False
+        else:
+                is_admin = False
+                is_superadmin = False
+        
+
+
+
+
+
+
 #ADD USERNAME TO USERNAME.TXT IT WILL  AUTO CONVERT TO JID
         if '/n' in mssg:
             is_superadmin
