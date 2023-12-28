@@ -1340,7 +1340,6 @@ class EchoBot(KikClientCallback):
                 pass
 
         elif re.search(" has joined the chat$", str(response.status)) or re.search(" has added you to the chat$", str(response.status)):
-                new_user_jid = response.from_jid
                 welcome_message = self.database.get_welcome(response.group_jid,)
                 if welcome_message:
                     self.client.send_chat_message(response.group_jid, welcome_message)
