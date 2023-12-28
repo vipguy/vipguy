@@ -274,7 +274,50 @@ class BlackjackDatabase:
 
 
 
+#admin database 
+def add_admin(group_id, user_id):
+    conn = sqlite3.connect('db.sqlite3')
+    curr = conn.cursor()
+    curr.execute(f'INSERT INTO admins VALUES (?, ?)', (group_id, user_id))
+    conn.commit()
+    conn.close()
 
+def remove_admin(group_id, user_id):
+    conn = sqlite3.connect('db.sqlite3')
+    curr = conn.cursor()
+    curr.execute(f'DELETE FROM admins WHERE (group_id = ? AND user_id = ?)', (group_id, user_id))
+    conn.commit()
+    conn.close()
+
+logging.basicConfig(level=logging.DEBUG)
+
+def is_user_admin(user_id, group_id):
+    conn = sqlite3.connect('db.sqlite3')
+    curr = conn.cursor()
+    curr.execute(f'SELECT * FROM admins WHERE (user_id=? AND group_id = ?)', (user_id, group_id))
+    rows = curr.fetchall()
+
+    conn.close()
+
+    if rows == []:
+        return False
+    else:
+        return True
+
+def get_admins(group_id):
+    with sqlite3.connect('db.sqlite3') as conn:
+        curr = conn.cursor()
+        curr.execute('SELECT * FROM admins WHERE group_id=?', (group_id,))
+        rows = curr.fetchall()
+
+    if not rows:
+        return "No admins found in this group."
+
+    admin_list = "List of Admins:\n"
+    for row in rows:
+        admin_list += f"- {row[1]}\n"  # Assuming row[1] contains the admin's name or identifier
+
+    return admin_list
 
 ###   CUSTOME COMMANDS LIKE WELCOME MESSAGE AND TRIGGER RESPONS DATABASE 
 #@101KEK
